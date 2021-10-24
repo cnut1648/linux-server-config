@@ -47,7 +47,16 @@ curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim.appimage
 chmod u+x nvim.appimage
 mv ./nvim.appimage ./nvim
 rm -r ~/.config/nvim; mkdir ~/.config/nvim;
-cp $repo/init.vim ~/.config/nvim;
+cp $repo/dotfiles/nvim/init.vim ~/.config/nvim;
+sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
+       https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim';
+# install plugins
+nvim +':PlugInstall';
+
+# ranger
+# installed in pip.sh
+rm -rf ~/.config/ranger; mkdir ~/.config/ranger;
+cp -rf $repo/dotfiles/ranger/* ~/.config/ranger/;
 
 cp $repo/.bashrc ~;
 # reinit conda
