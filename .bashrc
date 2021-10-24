@@ -102,14 +102,11 @@ alias gcl="git clone"
 alias sb='sbatch'
 alias sc='scancel'
 alias gpu='gpustat'
+alias ls='lsd'
 export PATH=$PATH:~
-alias py=/home/jiashu/.conda/envs/fact/bin/python
-alias mpy=/home/jiashu/.conda/envs/meta/bin/python
 alias arg='python ~/arg.py'
-alias sby='/home/jiashu/.conda/envs/fact/bin/python ~/sb.py'
-alias vpy='/home/jiashu/.conda/envs/valley/bin/python'
 # need by mcfly
-export HISTFILE=/home/jiashu/.bash_history
+export HISTFILE=~/.bash_history
 function sgpu(){
 	export CUDA_DEVICE_ORDER="PCI_BUS_ID"
 	export CUDA_VISIBLE_DEVICES=$1

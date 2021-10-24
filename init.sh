@@ -1,8 +1,9 @@
 #! /bin/bash
-mkdir ~/.config;
-mkdir ~/tools;
+# create if not exist
+[ -d ~/.config ] || mkdir ~/.config;
+[ -d ~/tools ] || mkdir ~/tools;
 # git repo dir
-cur=$( pwd )
+repo=$( pwd )
 cd ~/tools;
 
 # dust for better du
@@ -45,7 +46,11 @@ mv pkg/lsd . && rm -rf ./pkg;
 curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim.appimage
 chmod u+x nvim.appimage
 mv ./nvim.appimage ./nvim
-mkdir ~/.config/nvim;
-cp init.vim ~/.config/nvim/init.vim
+rm -r ~/.config/nvim; mkdir ~/.config/nvim;
+cp $repo/init.vim ~/.config/nvim;
 
-
+cp $repo/.bashrc ~;
+# reinit conda
+~/miniconda3/bin/conda init bash;
+# permission to all binaries
+chmod u+x *;
