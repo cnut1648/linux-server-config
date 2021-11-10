@@ -180,3 +180,6 @@ function rgpu() {
     # exec $cmd &
 }
 export -f rgpu;
+
+# for ranger
+export RANGER_ZLUA=${HOME}'/.oh-my-zsh/custom/plugins/z.lua/z.lua'

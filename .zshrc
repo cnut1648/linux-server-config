@@ -50,6 +50,7 @@ export LESS_TERMCAP_ue=$'\E[0m'        # reset underline
 
 # Path to your oh-my-zsh installation.
 export ZSH="${HOME}/.oh-my-zsh"
+export PATH="$PATH:$HOME/tools/"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -116,24 +117,25 @@ ENABLE_CORRECTION="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
+# TODO fasd
 plugins=(git fast-syntax-highlighting zsh-autosuggestions
-  extract fasd k zsh-completions rand-quote z.lua autoupdate
+  extract k zsh-completions rand-quote z.lua autoupdate
   dirhistory
   you-should-use ripgrep fzf-tab fz)
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=180'
 
 # for fasd
-eval "$(fasd --init auto)"
-# for z.lua
-eval "$(lua ${HOME}/.oh-my-zsh/custom/plugins/z.lua/z.lua --init zsh enhanced)"
-# use z.lua with fz
-function _z() { _zlua "$@"; }
-export RANGER_ZLUA=${HOME}'/.oh-my-zsh/custom/plugins/z.lua/z.lua'
-export _ZL_DATA=${HOME}'/.config/.zlua'
-# escape %- by -, z A-B instead of z A&-B to jump ../A-B
-export _ZL_HYPHEN=1
-# you-should-use hardcore mode
-export YSU_HARDCORE=0
+# eval "$(fasd --init auto)"
+# # for z.lua
+# eval "$(lua ${HOME}/.oh-my-zsh/custom/plugins/z.lua/z.lua --init zsh enhanced)"
+# # use z.lua with fz
+# function _z() { _zlua "$@"; }
+# export RANGER_ZLUA=${HOME}'/.oh-my-zsh/custom/plugins/z.lua/z.lua'
+# export _ZL_DATA=${HOME}'/.config/.zlua'
+# # escape %- by -, z A-B instead of z A&-B to jump ../A-B
+# export _ZL_HYPHEN=1
+# # you-should-use hardcore mode
+# export YSU_HARDCORE=0
 
 source $ZSH/oh-my-zsh.sh
 
@@ -166,8 +168,8 @@ source $ZSH/oh-my-zsh.sh
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-# kitty autocomplete
-kitty + complete setup zsh | source /dev/stdin
+# kitty autocomplete [no kitty in remote]
+# kitty + complete setup zsh | source /dev/stdin
 
 # prevent neovim ctrl+j insert navigation
 bindkey -r "^J"
