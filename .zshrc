@@ -35,7 +35,7 @@ alias diff='kitty +kitten diff'
 alias img='kitty +kitten icat'
 
 alias -g L='| less'
-alias ipython="/home/chris/miniconda3/envs/ds/bin/ipython"
+alias ipython=${HOME}/"miniconda3/envs/ds/bin/ipython"
 
 export LESS='--quit-if-one-screen --mouse --wheel-lines=3 --ignore-case --status-column --LONG-PROMPT --RAW-CONTROL-CHARS --HILITE-UNREAD --tabs=4 --no-init --window=-4'
 export LESS_TERMCAP_mb=$'\E[1;31m'     # begin bold
@@ -49,7 +49,7 @@ export LESS_TERMCAP_ue=$'\E[0m'        # reset underline
 
 
 # Path to your oh-my-zsh installation.
-export ZSH="/home/chris/.oh-my-zsh"
+export ZSH="${HOME}/.oh-my-zsh"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -125,11 +125,11 @@ ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=180'
 # for fasd
 eval "$(fasd --init auto)"
 # for z.lua
-eval "$(lua /home/chris/.oh-my-zsh/custom/plugins/z.lua/z.lua --init zsh enhanced)"
+eval "$(lua ${HOME}/.oh-my-zsh/custom/plugins/z.lua/z.lua --init zsh enhanced)"
 # use z.lua with fz
 function _z() { _zlua "$@"; }
-export RANGER_ZLUA='/home/chris/.oh-my-zsh/custom/plugins/z.lua/z.lua'
-export _ZL_DATA='~/.config/.zlua'
+export RANGER_ZLUA=${HOME}'/.oh-my-zsh/custom/plugins/z.lua/z.lua'
+export _ZL_DATA=${HOME}'/.config/.zlua'
 # escape %- by -, z A-B instead of z A&-B to jump ../A-B
 export _ZL_HYPHEN=1
 # you-should-use hardcore mode
@@ -218,7 +218,7 @@ export FZF_TAB_OPTS=(
 
 # copy in zsh, since has !, zsh thinks its his expansion, setopt nobanghis to disable his expansion
 # --follow cause fzf read file with no permission, send error to null to ignore
-export RIPGREP_CONFIG_PATH='/home/chris/.config/.ripgreprc'
+export RIPGREP_CONFIG_PATH='~/.config/.ripgreprc'
 export FZF_DEFAULT_COMMAND='rg --files --hidden --follow 2> /dev/null'
 fancy-ctrl-z () {
   if [[ $#BUFFER -eq 0 ]]; then
@@ -235,8 +235,8 @@ bindkey '^Z' fancy-ctrl-z
 alias o='a -e xdg-open'
 alias v='f -e nvim'
 
-alias em='/home/chris/.emacs.d/doom-emacs/bin/doom run'
-alias doom='/home/chris/.emacs.d/doom-emacs/bin/doom'
+alias em=${HOME}'/.emacs.d/doom-emacs/bin/doom run'
+alias doom=${HOME}'/.emacs.d/doom-emacs/bin/doom'
 
 
 # cuda
@@ -252,8 +252,8 @@ export PATH=$PATH:$ANDROID_HOME
 export TOMCAT_HOME=/usr/share/tomcat8
 
 # spark
-export PYSPARK_DRIVER_PYTHON='/home/chris/miniconda3/envs/ds/bin/python'
-export PYSPARK_PYTHON='/home/chris/miniconda3/envs/ds/bin/python'
+export PYSPARK_DRIVER_PYTHON=${HOME}'/miniconda3/envs/ds/bin/python'
+export PYSPARK_PYTHON=${HOME}'/miniconda3/envs/ds/bin/python'
 
 # install from https://github.com/darkhz/adbtuifm
 alias adbtui='/home/chris/go/bin/adbtuifm --remote=/sdcard/books --local=/home/chris/Downloads --mode ADB'
