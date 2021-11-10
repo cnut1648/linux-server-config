@@ -73,6 +73,7 @@ rm -rf ~/.config/ranger; mkdir ~/.config/ranger;
 cp -rf $repo/dotfiles/ranger/* ~/.config/ranger/;
 
 cp $repo/.bashrc ~;
+cp $repo/.zshrc ~;
 # reinit conda
 ~/miniconda3/bin/conda init bash;
 # permission to all binaries
