@@ -3,6 +3,18 @@ Server setup
 
 Set up dotfiles on Ubuntu server without `apt-get`
 
+
+1. install latest tar
+
+```sh
+wget https://ftp.gnu.org/gnu/tar/tar-latest.tar.gz;
+tar xvfz tar-latest.tar.gz；
+cd tar-1.34/;
+./configure && make && make install
+# move binary
+mv ./tar-1.34/src/tar .
+```
+
 After running `init`
 
 # Lua

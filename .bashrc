@@ -145,7 +145,7 @@ if ! shopt -oq posix; then
   fi
 fi
 
-export PATH="$PATH:$HOME/tools/"
+export PATH="$HOME/tools/:$PATH"
 eval "$(mcfly init bash)"
 
 function rgpu() {

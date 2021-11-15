@@ -9,6 +9,7 @@ git config --global user.email "jiashuxu@usc.edu"
 # tools
 ####################
 
+
 # create if not exist
 [ -d ~/.config ] || mkdir ~/.config;
 [ -d ~/tools ] || mkdir ~/tools;
