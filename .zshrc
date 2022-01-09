@@ -125,13 +125,15 @@ plugins=(git fast-syntax-highlighting zsh-autosuggestions
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=180'
 
 # for fasd
-# eval "$(fasd --init auto)"
+
+export PATH="$PATH:$HOME/.oh-my-zsh/custom/plugins/fasd"
+eval "$(fasd --init auto)"
 # # for z.lua
-# eval "$(lua ${HOME}/.oh-my-zsh/custom/plugins/z.lua/z.lua --init zsh enhanced)"
+eval "$(lua ${HOME}/.oh-my-zsh/custom/plugins/z.lua/z.lua --init zsh enhanced)"
 # # use z.lua with fz
-# function _z() { _zlua "$@"; }
-# export RANGER_ZLUA=${HOME}'/.oh-my-zsh/custom/plugins/z.lua/z.lua'
-# export _ZL_DATA=${HOME}'/.config/.zlua'
+function _z() { _zlua "$@"; }
+export RANGER_ZLUA=${HOME}'/.oh-my-zsh/custom/plugins/z.lua/z.lua'
+export _ZL_DATA=${HOME}'/.config/.zlua'
 # # escape %- by -, z A-B instead of z A&-B to jump ../A-B
 # export _ZL_HYPHEN=1
 # # you-should-use hardcore mode
