@@ -206,7 +206,7 @@ bindkey "^[^[" sudo-command-line  # <ESC> <ESC>
 # bindkey "^L" forward-char # remove clear-screen widget
 # bindkey "^F" clear-screen
 
-source /usr/share/fzf/completion.zsh
+# source /usr/share/fzf/completion.zsh
 # use fzf-tab instead of predefined keybind
 # source /usr/share/fzf/key-bindings.zsh
 export FZF_TAB_OPTS=(
@@ -267,6 +267,7 @@ alias rslsync='rslsync --log /home/chris/.config/rslsync/rlog --config /home/chr
 eval "$(mcfly init zsh)"
 
 alias ls="lsd"
+alias gpu='gpustat'
 
 # not let zsh store failed commands
  zshaddhistory() { whence ${${(z)1}[1]} >| /dev/null || return 1 }
