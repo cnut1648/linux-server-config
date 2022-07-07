@@ -10,6 +10,7 @@ Set up dotfiles on Ubuntu server without `apt-get`
 wget https://ftp.gnu.org/gnu/tar/tar-latest.tar.gz;
 tar xvfz tar-latest.tar.gz;
 cd tar-1.34/;
+# last step might need sudo
 ./configure && make && make install
 # move binary
 mv ./tar-1.34/src/tar .
@@ -26,3 +27,4 @@ Needed by ranger z-lua plugins
 4. in `src`, have `lua` (interpreter), `luac` (compiler) and `liblua.a` (library)
 
 # Conda
+download `x86_64` script from [here](https://repo.continuum.io/miniconda/)
