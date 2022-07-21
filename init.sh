@@ -17,6 +17,8 @@ git config --global user.email "jiashuxu@usc.edu"
 repo=$( pwd )
 cd ~/tools;
 
+mv $repo/args.py .
+
 # dust for better du
 # from https://github.com/bootandy/dust/releases
 URL='https://github.com/bootandy/dust/releases/download/v0.7.5/dust-v0.7.5-x86_64-unknown-linux-gnu.tar.gz';
