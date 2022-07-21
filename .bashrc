@@ -104,7 +104,7 @@ alias sc='scancel'
 alias gpu='gpustat'
 alias ls='lsd'
 export PATH=$PATH:~
-alias arg='python ~/arg.py'
+alias arg='python ~/tools/args.py'
 # need by mcfly
 export HISTFILE=~/.bash_history
 function sgpu(){
