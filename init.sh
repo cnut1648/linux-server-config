@@ -1,9 +1,20 @@
 #! /bin/bash
+
+####################
 # github
+####################
 git config --global credential.helper store
 git config --global user.name "jiashu"
 git config --global user.email "jiashuxu@usc.edu"
+cp ~/.gitconfig ~
 
+####################
+# tmux
+####################
+git clone https://github.com/gpakosz/.tmux.git
+cp .tmux/.tmux.conf ~
+cp .tmux/.tmux.conf.local ~
+rm -rf .tmux
 
 ####################
 # tools
@@ -17,7 +28,7 @@ git config --global user.email "jiashuxu@usc.edu"
 repo=$( pwd )
 cd ~/tools;
 
-mv $repo/args.py .
+cp $repo/args.py .
 
 # dust for better du
 # from https://github.com/bootandy/dust/releases

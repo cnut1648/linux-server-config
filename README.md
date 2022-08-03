@@ -8,9 +8,9 @@ Set up dotfiles on Ubuntu server without `apt-get`
 
 ```sh
 wget https://ftp.gnu.org/gnu/tar/tar-latest.tar.gz;
-tar xvfz tar-latest.tar.gz;
-cd tar-1.34/;
-# last step might need sudo
+tar xvfz tar-*.tar.gz;
+cd tar-*/;
+# last step might need sudo, or configure --prefix=local_path
 ./configure && make && make install
 # move binary
 mv ./tar-1.34/src/tar .
