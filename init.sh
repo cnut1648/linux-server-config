@@ -78,6 +78,10 @@ tar -xvf pkg.tar.gz --one-top-level=pkg --strip-components 1;
 rm ./pkg.tar.gz;
 mv pkg/lsd . && rm -rf ./pkg;
 
+# zoxide
+curl -sS https://webinstall.dev/zoxide | bash
+echo 'eval "$(zoxide init bash)"' >> ~/.bashrc
+
 # neovim
 curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim.appimage
 chmod u+x nvim.appimage
@@ -95,6 +99,8 @@ fi
 # installed in pip.sh
 rm -rf ~/.config/ranger; mkdir ~/.config/ranger;
 cp -rf $repo/dotfiles/ranger/* ~/.config/ranger/;
+
+
 
 # permission to all binaries
 chmod u+x *;
