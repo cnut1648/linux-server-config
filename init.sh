@@ -33,56 +33,61 @@ cp $repo/args.py .
 # dust for better du
 # from https://github.com/bootandy/dust/releases
 URL='https://github.com/bootandy/dust/releases/download/v0.7.5/dust-v0.7.5-x86_64-unknown-linux-gnu.tar.gz';
-wget $URL -O ./pkg.tar.gz;
-# unzip to `pkg`
-tar -xvf pkg.tar.gz --one-top-level=pkg --strip-components 1;
-rm ./pkg.tar.gz;
-mv pkg/dust . && rm -rf ./pkg;
-
+wget $URL;
+tar -xvzf dust-*.tar.gz;
+mv dust-*/dust .;
+rm -rf dust-*
 
 # mcfly for better C-r
 # from https://github.com/cantino/mcfly/releases
 URL='https://github.com/cantino/mcfly/releases/download/v0.5.9/mcfly-v0.5.9-x86_64-unknown-linux-musl.tar.gz'
-wget $URL -O ./pkg.tar.gz;
-tar -xvf pkg.tar.gz --one-top-level=mcfly --strip-components 1;
-rm ./pkg.tar.gz;
+wget $URL;
+tar -xvzf mcfly-*.tar.gz;
+mv mcfly-*/mcfly .;
+rm -rf mcfly-*
 
 # ripgrep for better grep
 # from https://github.com/BurntSushi/ripgrep/releases
 URL='https://github.com/BurntSushi/ripgrep/releases/download/13.0.0/ripgrep-13.0.0-x86_64-unknown-linux-musl.tar.gz'
-wget $URL -O ./pkg.tar.gz;
-tar -xvf pkg.tar.gz --one-top-level=pkg --strip-components 1;
-rm ./pkg.tar.gz;
-mv pkg/rg . && rm -rf ./pkg;
+wget $URL;
+tar -xvzf ripgrep-*.tar.gz;
+mv ripgrep-*/rg .;
+rm -rf ripgrep-*
 
 # delta for better diff
 # from https://github.com/dandavison/delta#installation
 URL='https://github.com/dandavison/delta/releases/download/0.8.3/delta-0.8.3-x86_64-unknown-linux-gnu.tar.gz';
-wget $URL -O ./pkg.tar.gz;
-tar -xvf pkg.tar.gz --one-top-level=pkg --strip-components 1;
-rm ./pkg.tar.gz;
-mv pkg/delta . && rm -rf ./pkg;
+wget $URL;
+tar -xvzf delta-*.tar.gz;
+mv delta-*/delta .;
+rm -rf delta-*
 
 # fzf
 # from https://github.com/junegunn/fzf/releases
 URL='https://github.com/junegunn/fzf/releases/download/0.27.3/fzf-0.27.3-linux_amd64.tar.gz';
-wget $URL -O ./pkg.tar.gz;
-tar -xvf pkg.tar.gz --one-top-level=fzf --strip-components 1;
-rm ./pkg.tar.gz;
+wget $URL;
+tar -xvzf fzf-*.tar.gz;
+mv fzf-*/fzf .;
+rm -rf fzf-*
 
 # lsd for better ls
 # from https://github.com/Peltoche/lsd/releases
 URL='https://github.com/Peltoche/lsd/releases/download/0.20.1/lsd-0.20.1-x86_64-unknown-linux-musl.tar.gz'
-wget $URL -O ./pkg.tar.gz;
-tar -xvf pkg.tar.gz --one-top-level=pkg --strip-components 1;
-rm ./pkg.tar.gz;
-mv pkg/lsd . && rm -rf ./pkg;
+wget $URL;
+tar -xvzf lsd-*.tar.gz;
+mv lsd-*/lsd .;
+rm -rf lsd-*
 
 # zoxide
 curl -sS https://webinstall.dev/zoxide | bash
 echo 'eval "$(zoxide init bash)"' >> ~/.bashrc
 
 # neovim
+URL='https://github.com/neovim/neovim/releases/download/nightly/nvim-linux64.tar.gz'
+wget $URL;
+tar -xvzf nvim-*.tar.gz;
+mv nvim-*/nvim .;
+rm -rf nvim-*
 curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim.appimage
 chmod u+x nvim.appimage
 mv ./nvim.appimage ./nvim
