@@ -4,6 +4,6 @@
 
 source activate base;
 pip install -U --user gpustat ranger-fm;
-# symbolic link
+# symbolic link, generally in ~/.local/bin
 ln -s $( which ranger ) ~/tools/ranger
 ln -s $( which gpustat ) ~/tools/gpustat
