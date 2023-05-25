@@ -1,5 +1,3 @@
-typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet
-
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block, everything else may go below.
@@ -14,14 +12,9 @@ setopt append_history
 setopt nomatch   # when no match print error
 setopt extended_glob
 
-autoload zmv
+autoload zmv # smart rename
 alias zcp='zmv -C' zln='zmv -L'
 
-# alias joplin='joplin --profile ~/.config/joplin-desktop/'
-
-export GTK_IM_MODULE=ibus
-export XMODIFIERS=@im=ibus
-export QT_IM_MODULE=ibus
 export EDITOR="nvim"
 
 alias cp="cp -i"                          # confirm before overwriting something
@@ -31,8 +24,6 @@ alias np='nano -w PKGBUILD'
 alias more=less
 
 alias n='nvim'
-alias diff='kitty +kitten diff'
-alias img='kitty +kitten icat'
 
 alias -g L='| less'
 alias ipython=${HOME}/"miniconda3/envs/ds/bin/ipython"
@@ -45,7 +36,8 @@ export LESS_TERMCAP_so=$'\E[01;44;33m' # begin reverse video
 export LESS_TERMCAP_se=$'\E[0m'        # reset reverse video
 export LESS_TERMCAP_us=$'\E[1;32m'     # begin underline
 export LESS_TERMCAP_ue=$'\E[0m'        # reset underline
-
+# use zsh
+TIMEFMT=$'\n================\nCPU\t%P\nuser\t%*U\nsystem\t%*S\ntotal\t%*E'
 
 
 # Path to your oh-my-zsh installation.
@@ -117,27 +109,33 @@ ENABLE_CORRECTION="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-# TODO fasd
-plugins=(git fast-syntax-highlighting zsh-autosuggestions
-  extract k zsh-completions rand-quote z.lua autoupdate
-  dirhistory
-  you-should-use ripgrep fzf-tab fz)
+plugins=(
+	###### default
+	git # alias for git
+	fancy-ctrl-z # <ctrl-z> twice to bring back bg jobs; no `fg` needed anymore
+	extract # use `x` to extract
+	colored-man-pages # man in a colored format
+	sudo # press <ESC> twice to prepend sudo
+	rand-quote # use `quote` to create random quote, below define <Ctrl-Q> to display
+	dirhistory # <Alt-arrow> to navigate through directory
+	ripgrep # completion for rg
+	###### custom
+	# see README of https://github.com/cnut1648/dotfiles for url
+	fast-syntax-highlighting # add syntax highlight
+	k # use `k` to list files, replace `ls -l`
+	autoupdate # autoupdate custom plugins for @UPDATE_ZSH_DAYS
+	fzf-tab # Replace zsh's default completion selection menu with fzf!
+	you-should-use # remind of alias
+	zsh-autosuggestions # show suggestions based on history
+	zsh-completions # enhanced completion for `zsh` functions
+    fzf-dir-navigator # ctrl-f to fzf -> cd
+)
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=180'
 
-# for fasd
-
-export PATH="$PATH:$HOME/.oh-my-zsh/custom/plugins/fasd"
-eval "$(fasd --init auto)"
-# # for z.lua
-eval "$(lua ${HOME}/.oh-my-zsh/custom/plugins/z.lua/z.lua --init zsh enhanced)"
-# # use z.lua with fz
-function _z() { _zlua "$@"; }
-export RANGER_ZLUA=${HOME}'/.oh-my-zsh/custom/plugins/z.lua/z.lua'
-export _ZL_DATA=${HOME}'/.config/.zlua'
-# # escape %- by -, z A-B instead of z A&-B to jump ../A-B
-# export _ZL_HYPHEN=1
-# # you-should-use hardcore mode
-# export YSU_HARDCORE=0
+# for zoxide
+eval "$(zoxide init zsh)"
+# you-should-use hardcore mode
+export YSU_HARDCORE=0
 
 source $ZSH/oh-my-zsh.sh
 
@@ -170,11 +168,12 @@ source $ZSH/oh-my-zsh.sh
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-# kitty autocomplete [no kitty in remote]
-# kitty + complete setup zsh | source /dev/stdin
-
 # prevent neovim ctrl+j insert navigation
 bindkey -r "^J"
+
+# fzf-Dir-navigator overwrite <C-F>, use <Alt-F> instead
+bindkey "^F" forward-char
+bindkey "^[f" fzf-dir
 
 print_quote() {echo;echo $(quote); zle reset-prompt}
 # create new widget
@@ -187,28 +186,16 @@ run_ranger () {
     ranger --choosedir=$HOME/.config/.rangerdir < $TTY
     LASTDIR=`< $HOME/.config/.rangerdir`
     cd "$LASTDIR"
-# zle reset-prompt won't refresh if using powerlevel10k theme
+    # zle reset-prompt won't refresh if using powerlevel10k theme
     zle accept-line
 }
 zle -N run_ranger
 bindkey '^K' run_ranger
 
-## insert sudo {{{
-sudo-command-line() {
-    [[ -z $BUFFER ]] && zle up-history
-    [[ $BUFFER != sudo\ * ]] && BUFFER="_ $BUFFER"
-    zle end-of-line                 # move cursor to end-of-line
-}
-zle -N sudo-command-line
-bindkey "^[^[" sudo-command-line  # <ESC> <ESC>
-
 # bindkey "^H" backward-char
 # bindkey "^L" forward-char # remove clear-screen widget
 # bindkey "^F" clear-screen
 
-# source /usr/share/fzf/completion.zsh
-# use fzf-tab instead of predefined keybind
-# source /usr/share/fzf/key-bindings.zsh
 export FZF_TAB_OPTS=(
     --ansi   # Enable ANSI color support, necessary for showing groups
     --expect='/' # For continuous completion
@@ -218,56 +205,18 @@ export FZF_TAB_OPTS=(
     --tiebreak=begin -m --bind=tab:down,change:top,ctrl-space:toggle --cycle
     '--query=$query'   # $query will be expanded to query string at runtime.
     '--header-lines=$#headers' # $#headers will be expanded to lines of headers at runtime
-    )
+)
 
-# copy in zsh, since has !, zsh thinks its his expansion, setopt nobanghis to disable his expansion
-# --follow cause fzf read file with no permission, send error to null to ignore
-export RIPGREP_CONFIG_PATH='~/.config/.ripgreprc'
-export FZF_DEFAULT_COMMAND='rg --files --hidden --follow 2> /dev/null'
-fancy-ctrl-z () {
-  if [[ $#BUFFER -eq 0 ]]; then
-    bg
-    zle redisplay
-  else
-    zle push-input
-  fi
-}
-# empty line --> run bg
-zle -N fancy-ctrl-z
-bindkey '^Z' fancy-ctrl-z
-
-alias o='a -e xdg-open'
-alias v='f -e nvim'
-
-alias em=${HOME}'/.emacs.d/doom-emacs/bin/doom run'
-alias doom=${HOME}'/.emacs.d/doom-emacs/bin/doom'
-
-
-# cuda
-export CUDA_HOME=/opt/cuda
-export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/cuda/lib64
-export PATH=$PATH:$CUDA_HOME/bin
-
-# android
-export ANDROID_HOME=$HOME/Android/Sdk
-export PATH=$PATH:$ANDROID_HOME
-
-# tomcat 8
-export TOMCAT_HOME=/usr/share/tomcat8
-
-# spark
-export PYSPARK_DRIVER_PYTHON=${HOME}'/miniconda3/envs/ds/bin/python'
-export PYSPARK_PYTHON=${HOME}'/miniconda3/envs/ds/bin/python'
-
-# install from https://github.com/darkhz/adbtuifm
-alias adbtui='/home/chris/go/bin/adbtuifm --remote=/sdcard/books --local=/home/chris/Downloads --mode ADB'
-alias rslsync='rslsync --log /home/chris/.config/rslsync/rlog --config /home/chris/.config/rslsync/rslsync.conf'
 
 # init mcfly to overload Ctrl-R
 eval "$(mcfly init zsh)"
 
 alias ls="lsd"
-alias gpu='gpustat'
 
 # not let zsh store failed commands
- zshaddhistory() { whence ${${(z)1}[1]} >| /dev/null || return 1 }
+zshaddhistory() { whence ${${(z)1}[1]} >| /dev/null || return 1 }
+
+function sgpu(){
+	export CUDA_DEVICE_ORDER="PCI_BUS_ID"
+	export CUDA_VISIBLE_DEVICES=$1
+}

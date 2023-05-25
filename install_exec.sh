@@ -79,33 +79,22 @@ mv lsd-*/lsd .;
 rm -rf lsd-*
 
 # zoxide
-curl -sS https://webinstall.dev/zoxide | bash
-echo 'eval "$(zoxide init bash)"' >> ~/.bashrc
+URL='https://github.com/ajeetdsouza/zoxide/releases/download/v0.9.1/zoxide-0.9.1-x86_64-unknown-linux-musl.tar.gz'
+wget $URL;
+mkdir zoxide_unzip;
+tar -xvzf zoxide-*.tar.gz -C zoxide_unzip;
+mv zoxide_unzip/zoxide .;
+rm -rf zoxide_unzip zoxide-*.tar.gz;
 
 # neovim
-URL='https://github.com/neovim/neovim/releases/download/nightly/nvim-linux64.tar.gz'
-wget $URL;
-tar -xvzf nvim-*.tar.gz;
-mv nvim-*/nvim .;
-rm -rf nvim-*
 curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim.appimage
 chmod u+x nvim.appimage
 mv ./nvim.appimage ./nvim
-[ -d ~/.config/nvim ] || mkdir ~/.config/nvim && cp $repo/dotfiles/nvim/init.vim ~/.config/nvim;
-if [ ! -d ~/.config/nvim/plugged ]; then
-       # install plugins if not installed already
-       mkdir ~/.config/nvim;
-       sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
-        https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim';
-       # run :PlugInstall in nvim
-fi
 
 # ranger
 # installed in pip.sh
 rm -rf ~/.config/ranger; mkdir ~/.config/ranger;
 cp -rf $repo/dotfiles/ranger/* ~/.config/ranger/;
-
-
 
 # permission to all binaries
 chmod u+x *;
@@ -117,26 +106,3 @@ chmod u+x *;
 cp $repo/.bashrc ~;
 # reinit conda
 ~/miniconda3/bin/conda init bash;
-
-####################
-# zsh
-####################
-
-# cp $repo/.zshrc ~;
-sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
-
-# use upgrade_oh_my_zsh_custom to update
-git clone https://github.com/TamCore/autoupdate-oh-my-zsh-plugins.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/autoupdate
-git clone https://github.com/allcatsarebeautiful/fasd ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/fasd
-git clone https://github.com/zdharma/fast-syntax-highlighting ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/fast-syntax-highlighting
-git clone https://github.com/changyuheng/fz ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/fz
-git clone https://github.com/Aloxaf/fzf-tab ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/fzf-tab
-git clone https://github.com/supercrabtree/k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/k
-git clone https://github.com/MichaelAquilina/zsh-you-should-use.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/you-should-use
-git clone https://github.com/skywind3000/z.lua.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/z.lua
-git clone https://github.com/zsh-users/zsh-autosuggestions.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
-git clone https://github.com/zsh-users/zsh-completions.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-completions
-git clone https://github.com/zdharma-continuum/fast-syntax-highlighting.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/fast-syntax-highlighting
-
-~/miniconda3/bin/conda init zsh;
