@@ -222,6 +222,7 @@ function sgpu(){
 }
 
 alias gpu="gpustat"
+alias arg="python ~/tools/args.py"
 
 # FOR TMUX
 export PATH=$HOME/local/bin:$PATH

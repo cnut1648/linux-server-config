@@ -12,6 +12,8 @@ import sys, json
 args = sys.argv[1:]
 args = filter(lambda s: s not in ["'", '"'], args)
 args = list(args)
+if len(args) == 1:
+    args = args[0].split()
 print(json.dumps(args))
 # OR, print one by one
 curline = []
