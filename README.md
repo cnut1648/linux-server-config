@@ -21,7 +21,8 @@ Set up dotfiles on Ubuntu server without `apt-get`. In fact since it does not re
 
 3. Install executables via `./install_exec.sh`. These binaries are stored in `~/tools`.
 
-   Note that if the system does not have FUSE you can extract the appimage:
+   **Note**
+   If the system does not have FUSE you can extract the appimage:
    ```shell
    cd ~/tools;
    ./nvim --appimage-extract
@@ -33,6 +34,31 @@ Set up dotfiles on Ubuntu server without `apt-get`. In fact since it does not re
 4. Copy `.bashrc` and `.zshrc` to `~/`. Then install oh-my-zsh according to [Step 5. item 3](https://github.com/cnut1648/dotfiles/tree/master#step-5).
    
    Optionally, to make use of [`delta`](https://github.com/dandavison/delta) in `git diff`, you can copy `.gitconfig` to `~/` as well.
+   
+   **Note**
+   On AWS to change default shell, you need to
+   ```shell
+   sudo yum install util-linux-user
+   sudo chsh -s $(which zsh) $(whoami)
+   # in vscode you might need to Ctrl+Shift+P then `Terminal: Select Default Profile`
+   ```
+   
+   *  Sometimes you need to automate `zsh` by the following in bash:
+
+      ```shell
+      # install oh-my-zsh
+      sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+      # install p10k
+      git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
+      echo ZSH_THEME="powerlevel10k/powerlevel10k" >> ~/.zshrc
+      echo source $ZSH/oh-my-zsh.sh >> ~/.zshrc
+      # if p10k not prompt automatically, use `p10k configure`
+      exec zsh
+
+      # install custom plugins from the hyperlink above
+      # ...
+      cp .zshrc ~
+      ```
 
 5. Runing `./pip.sh` to install useful commands via `pip`.
 
