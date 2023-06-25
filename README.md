@@ -21,8 +21,8 @@ Set up dotfiles on Ubuntu server without `apt-get`. In fact since it does not re
 
 3. Install executables via `./install_exec.sh`. These binaries are stored in `~/tools`.
 
-   **Note**
-   If the system does not have FUSE you can extract the appimage:
+   > **Note**
+   > If the system does not have FUSE you can extract the appimage:
    ```shell
    cd ~/tools;
    ./nvim --appimage-extract
@@ -35,8 +35,8 @@ Set up dotfiles on Ubuntu server without `apt-get`. In fact since it does not re
    
    Optionally, to make use of [`delta`](https://github.com/dandavison/delta) in `git diff`, you can copy `.gitconfig` to `~/` as well.
    
-   **Note**
-   On AWS to change default shell, you need to
+   > **Note**
+   > On AWS to change default shell, you need to
    ```shell
    sudo yum install util-linux-user
    sudo chsh -s $(which zsh) $(whoami)
@@ -60,6 +60,6 @@ Set up dotfiles on Ubuntu server without `apt-get`. In fact since it does not re
       cp .zshrc ~
       ```
 
-5. Runing `./pip.sh` to install useful commands via `pip`.
+6. Runing `./pip.sh` to install useful commands via `pip`.
 
-6. If you need a good nvim config, refer to [my nvim setup](https://github.com/cnut1648/nvim-lua.git)
+7. If you need a good nvim config, refer to [my nvim setup](https://github.com/cnut1648/nvim-lua.git)
