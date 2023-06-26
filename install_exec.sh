@@ -99,10 +99,5 @@ cp -rf $repo/dotfiles/ranger/* ~/.config/ranger/;
 # permission to all binaries
 chmod u+x *;
 
-####################
-# zsh
-####################
-
-cp $repo/.bashrc ~;
 # reinit conda
 ~/miniconda3/bin/conda init bash;
