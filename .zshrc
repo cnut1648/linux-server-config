@@ -224,6 +224,8 @@ function sgpu(){
 alias gpu="gpustat"
 alias arg="python ~/tools/args.py"
 
+export PATH=/code/jiashuxu-sandbox/tools:$PATH
+
 # FOR TMUX
 export PATH=$HOME/local/bin:$PATH
 export LD_LIBRARY_PATH=$HOME/local/lib:$LD_LIBRARY_PATH
