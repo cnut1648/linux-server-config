@@ -51,7 +51,8 @@ Set up dotfiles on Ubuntu server without `apt-get`. In fact since it does not re
       # install p10k
       git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
       echo ZSH_THEME="powerlevel10k/powerlevel10k" >> ~/.zshrc
-      echo source $ZSH/oh-my-zsh.sh >> ~/.zshrc
+      x='source $ZSH/oh-my-zsh.sh' # make sure $ZSH won't be sub
+      echo $x >> ~/.zshrc
       # if p10k not prompt automatically, use `p10k configure`
       exec zsh
 
