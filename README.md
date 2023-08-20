@@ -31,6 +31,9 @@ Set up dotfiles on Ubuntu server without `apt-get`. In fact since it does not re
    # do not delete squashfs-root, it is needed by nvim
    ```
 
+   > **Note**
+   > On AWS you can install latest tmux by `bash install_tmux_on_amazon_linux.sh`
+
 4. Copy `.bashrc` and `.zshrc` to `~/`. Then install oh-my-zsh according to [Step 5. item 3](https://github.com/cnut1648/dotfiles/tree/master#step-5).
    
    Optionally, to make use of [`delta`](https://github.com/dandavison/delta) in `git diff`, you can copy `.gitconfig` to `~/` as well.
